@@ -49,6 +49,8 @@ class TaskType extends AbstractType
                 'choice_label' => 'type',
                 'label' => 'Priorité de la tache'
             ))
+            ->add('picture', PictureType::class)
+
         ;
     }
     

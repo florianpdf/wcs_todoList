@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Task
@@ -64,6 +65,9 @@ class Task
      * @var \DateTime
      *
      * @ORM\Column(name="dateEnd", type="datetime")
+     *
+     * @Assert\GreaterThan("today")
+     *
      */
     private $dateEnd;
 
@@ -86,8 +90,10 @@ class Task
     /**
      * @var \AppBundle\Entity\Picture $picture
      *
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Picture")
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Picture", cascade={"all"})
      * @ORM\JoinColumn(nullable=true)
+     *
+     * @Assert\Valid
      */
     private $picture;
 

@@ -1,10 +1,62 @@
 {% extends 'base.html.twig' %}
 
+{# Custom des messages d'erreur #}
+{%- block form_errors -%}
+    {%- if errors|length > 0 -%}
+        {%- for error in errors -%}
+            <p class="red">{{ error.message }}</p>
+        {%- endfor -%}
+    {%- endif -%}
+{%- endblock form_errors -%}
+{# End custom #}
+
 {% block body %}
+
+    {# Doc ==> http://symfony.com/doc/3.4/form/form_customization.html #}
+
     <h1>Task creation</h1>
 
     {{ form_start(form) }}
-        {{ form_widget(form) }}
+    <div>
+        <div class="row">
+            {{ form_label(form.title, 'Titre', {'label_attr': {'class': 'foo'}}) }}
+        </div>
+        <div class="row">
+            {{ form_widget(form.title, {'attr': {'class': 'plop' }}) }}
+        </div>
+        {{ form_errors(form.title) }}
+    </div>
+    <div>
+        {{ form_label(form.description) }}
+        {{ form_widget(form.description) }}
+        {{ form_errors(form.description) }}
+    </div>
+    <div>
+        {{ form_label(form.status) }}
+        {{ form_widget(form.status) }}
+        {{ form_errors(form.status) }}
+    </div>
+    <div>
+        {{ form_label(form.dateEnd) }}
+        {{ form_widget(form.dateEnd) }}
+        {{ form_errors(form.dateEnd) }}
+    </div>
+    <div>
+        {{ form_label(form.category) }}
+        {{ form_widget(form.category) }}
+        {{ form_errors(form.category) }}
+    </div>
+    <div>
+        {{ form_label(form.priority) }}
+        {{ form_widget(form.priority) }}
+        {{ form_errors(form.priority) }}
+    </div>
+    <div>
+        {{ form_label(form.picture) }}
+        {{ form_widget(form.picture) }}
+        {{ form_errors(form.picture) }}
+    </div>
+
         <input type="submit" value="Create" />
     {{ form_end(form) }}
 

@@ -36,6 +36,10 @@ twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
 
+#    Charger le formTheme boostrap 3, decommenter les 2 lignes ci dessous
+#    form_themes:
+#        - 'bootstrap_3_horizontal_layout.html.twig'
+
 # Doctrine Configuration
 doctrine:
     dbal:

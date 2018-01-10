@@ -24,8 +24,13 @@ class TaskType extends AbstractType
             ->add('title', TextType::class, array(
                 'label' => 'Titre'
             ))
+
+            // Déclaration d'une class directement dans le formType
             ->add('description', TextareaType::class, array(
-                'label' => 'Description de la tache'
+                'label' => 'Description de la tache',
+                'attr' => array(
+                    'class' => 'myClassInFormType'
+                )
             ))
             ->add('status', ChoiceType::class, array(
                 'choices' => array(

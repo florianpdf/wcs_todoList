@@ -29,6 +29,7 @@ class FileUploader{
         $this->targetDir = $targetDir;
     }
 
+
     /**
      * Upload file from Picture entity
      *

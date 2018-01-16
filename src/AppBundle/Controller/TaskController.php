@@ -6,7 +6,8 @@ use AppBundle\Entity\Task;
 use AppBundle\Services\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Task controller.
@@ -49,6 +50,7 @@ class TaskController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
 
 //            File is not mandatory in task, so we check if user upload file
             if ($task->getPicture()->getFile() != null) {
@@ -95,6 +97,7 @@ class TaskController extends Controller
         $editForm = $this->createForm('AppBundle\Form\TaskType', $task);
         $editForm->handleRequest($request);
 
+
         if ($editForm->isSubmitted() && $editForm->isValid()) {
 
 //            If user upload a new File, call service fileUploder and update picture
@@ -104,7 +107,7 @@ class TaskController extends Controller
 
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('task_edit', array('id' => $task->getId()));
+            return $this->redirectToRoute('task_show', array('id' => $task->getId()));
         }
 
         return $this->render('task/edit.html.twig', array(
@@ -128,6 +131,7 @@ class TaskController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($task);
+
 
 //            File is not mandatory in task, so we check if task is link with a picture
             if ($task->getPicture() != null){

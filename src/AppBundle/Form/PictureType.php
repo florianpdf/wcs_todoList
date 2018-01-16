@@ -17,7 +17,8 @@ class PictureType extends AbstractType
     {
         $builder
             ->add('file', FileType::class, array(
-                'label' => "Votre fichier"
+                'label' => "Votre fichier",
+                'required' => false
             ))
             ->add('alt', TextType::class, array(
                 'label' => "Description de l'image"

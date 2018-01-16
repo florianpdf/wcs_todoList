@@ -4,13 +4,10 @@
     <h1>Task edit</h1>
 
     {{ form_start(edit_form) }}
+
         <div>
-            <div class="row">
-                {{ form_label(edit_form.title, 'Titre', {'label_attr': {'class': 'foo'}}) }}
-            </div>
-            <div class="row">
-                {{ form_widget(edit_form.title, {'attr': {'class': 'plop' }}) }}
-            </div>
+            {{ form_label(edit_form.title, 'Titre', {'label_attr': {'class': 'foo'}}) }}
+            {{ form_widget(edit_form.title, {'attr': {'class': 'plop' }}) }}
             {{ form_errors(edit_form.title) }}
         </div>
         <div>
@@ -40,9 +37,15 @@
         </div>
         <div>
             {{ form_label(edit_form.picture.file) }}
-            {{ form_widget(edit_form.picture.file, {'attr': {'required': false }}) }}
+            {{ form_widget(edit_form.picture.file) }}
             {{ form_errors(edit_form.picture.file) }}
         </div>
+        <div>
+            {{ form_label(edit_form.picture.alt) }}
+            {{ form_widget(edit_form.picture.alt) }}
+            {{ form_errors(edit_form.picture.alt) }}
+        </div>
+
         <input type="submit" value="Edit" />
     {{ form_end(edit_form) }}
 

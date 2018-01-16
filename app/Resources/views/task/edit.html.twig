@@ -4,7 +4,45 @@
     <h1>Task edit</h1>
 
     {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
+        <div>
+            <div class="row">
+                {{ form_label(edit_form.title, 'Titre', {'label_attr': {'class': 'foo'}}) }}
+            </div>
+            <div class="row">
+                {{ form_widget(edit_form.title, {'attr': {'class': 'plop' }}) }}
+            </div>
+            {{ form_errors(edit_form.title) }}
+        </div>
+        <div>
+            {{ form_label(edit_form.description) }}
+            {{ form_widget(edit_form.description) }}
+            {{ form_errors(edit_form.description) }}
+        </div>
+        <div>
+            {{ form_label(edit_form.status) }}
+            {{ form_widget(edit_form.status) }}
+            {{ form_errors(edit_form.status) }}
+        </div>
+        <div>
+            {{ form_label(edit_form.dateEnd) }}
+            {{ form_widget(edit_form.dateEnd) }}
+            {{ form_errors(edit_form.dateEnd) }}
+        </div>
+        <div>
+            {{ form_label(edit_form.category) }}
+            {{ form_widget(edit_form.category) }}
+            {{ form_errors(edit_form.category) }}
+        </div>
+        <div>
+            {{ form_label(edit_form.priority) }}
+            {{ form_widget(edit_form.priority) }}
+            {{ form_errors(edit_form.priority) }}
+        </div>
+        <div>
+            {{ form_label(edit_form.picture.file) }}
+            {{ form_widget(edit_form.picture.file, {'attr': {'required': false }}) }}
+            {{ form_errors(edit_form.picture.file) }}
+        </div>
         <input type="submit" value="Edit" />
     {{ form_end(edit_form) }}
 

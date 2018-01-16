@@ -27,9 +27,6 @@ class Picture
      *
      * @ORM\Column(name="name", type="string", length=255)
      *
-     * @Assert\Url(
-     *     message = "The url '{{ value }}' is not a valid url",
-     * )
      */
     private $name;
 
@@ -40,6 +37,17 @@ class Picture
      */
     private $alt;
 
+    /**
+     * @var \Symfony\Component\HttpFoundation\File\UploadedFile $file
+     *
+     * @Assert\File(
+     *     maxSize = "1024k",
+     *     mimeTypes = {"application/pdf", "application/x-pdf"},
+     *     mimeTypesMessage = "Please upload a valid PDF"
+     * )
+     *
+     */
+    private $file;
 
     /**
      * Get id
@@ -97,6 +105,22 @@ class Picture
     public function getAlt()
     {
         return $this->alt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    /**
+     * @param mixed $file
+     */
+    public function setFile($file)
+    {
+        $this->file = $file;
     }
 }
 

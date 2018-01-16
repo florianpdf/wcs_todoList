@@ -7,6 +7,7 @@ imports:
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
+    pictures_directory: '%kernel.project_dir%/web/uploads/'
 
 framework:
     #esi: ~
@@ -37,8 +38,8 @@ twig:
     strict_variables: '%kernel.debug%'
 
 #    Charger le formTheme boostrap 3, decommenter les 2 lignes ci dessous
-#    form_themes:
-#        - 'bootstrap_3_horizontal_layout.html.twig'
+    form_themes:
+        - 'bootstrap_3_horizontal_layout.html.twig'
 
 # Doctrine Configuration
 doctrine:

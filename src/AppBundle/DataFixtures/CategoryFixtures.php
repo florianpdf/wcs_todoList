@@ -6,24 +6,23 @@ use AppBundle\Entity\Priority;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class PriorityFixtures extends Fixture
+class CategoryFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        // create priorities. Bam !!
-        $priorities = [
-            1 => 'High',
-            2 => 'Medium',
-            3 => 'Low'
+        $categories = [
+            1 => 'Perso',
+            2 => 'Pro'
         ];
 
-        foreach ($priorities as $numberPriority => $type){
+        foreach ($categories as $numberPriority => $type){
             $priority = new Priority();
             $priority->setType($type);
             $priority->setNumberPriority($numberPriority);
             $manager->persist($priority);
 
-            $this->addReference('priority_' . $numberPriority, $priority);
+            $this->addReference('categ_' . $numberPriority, $priority);
+
         }
         $manager->flush();
 
@@ -35,6 +34,6 @@ class PriorityFixtures extends Fixture
      */
     public function getOrder()
     {
-        return 2;
+        return 1;
     }
 }

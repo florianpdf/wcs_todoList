@@ -3,9 +3,13 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Task;
+use AppBundle\Services\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Task controller.
@@ -37,7 +41,7 @@ class TaskController extends Controller
      * @Route("/new", name="task_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, FileUploader $fileUploader)
     {
         $task = new Task();
         $form = $this->createForm('AppBundle\Form\TaskType', $task);
@@ -45,6 +49,9 @@ class TaskController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            $fileUploader->upload($task->getPicture());
+
             $em->persist($task);
             $em->flush();
 
@@ -79,13 +86,18 @@ class TaskController extends Controller
      * @Route("/{id}/edit", name="task_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, Task $task)
+    public function editAction(Request $request, Task $task, FileUploader $fileUploader)
     {
         $deleteForm = $this->createDeleteForm($task);
         $editForm = $this->createForm('AppBundle\Form\TaskType', $task);
         $editForm->handleRequest($request);
 
+
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+
+            if ($task->getPicture()->getUploadedFile() != null){
+                $fileUploader->update($task->getPicture());
+            }
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('task_edit', array('id' => $task->getId()));
@@ -104,7 +116,7 @@ class TaskController extends Controller
      * @Route("/{id}", name="task_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, Task $task)
+    public function deleteAction(Request $request, Task $task, FileUploader $fileUploader)
     {
         $form = $this->createDeleteForm($task);
         $form->handleRequest($request);
@@ -112,6 +124,8 @@ class TaskController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($task);
+
+            $fileUploader->remove($task->getPicture()->getName());
             $em->flush();
         }
 

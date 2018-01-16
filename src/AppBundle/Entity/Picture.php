@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -27,9 +28,6 @@ class Picture
      *
      * @ORM\Column(name="name", type="string", length=255)
      *
-     * @Assert\Url(
-     *     message = "The url '{{ value }}' is not a valid url",
-     * )
      */
     private $name;
 
@@ -39,6 +37,11 @@ class Picture
      * @ORM\Column(name="alt", type="string", length=255)
      */
     private $alt;
+
+    /**
+     * @var \Symfony\Component\HttpFoundation\File\UploadedFile $uploadedFile
+     */
+    private $uploadedFile;
 
 
     /**
@@ -97,6 +100,22 @@ class Picture
     public function getAlt()
     {
         return $this->alt;
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\File\UploadedFile
+     */
+    public function getUploadedFile()
+    {
+        return $this->uploadedFile;
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\File\UploadedFile $uploadedFile
+     */
+    public function setUploadedFile(UploadedFile $uploadedFile)
+    {
+        $this->uploadedFile = $uploadedFile;
     }
 }
 

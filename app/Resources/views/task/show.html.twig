@@ -29,6 +29,12 @@
                 <th>Dateend</th>
                 <td>{% if task.dateEnd %}{{ task.dateEnd|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
+            <tr>
+                <th>Picture</th>
+                <td>
+                    <img width="40" src="{{ asset('uploads/' ~ task.picture.name) }}" alt="{{ task.picture.alt }}">
+                </td>
+            </tr>
         </tbody>
     </table>
 

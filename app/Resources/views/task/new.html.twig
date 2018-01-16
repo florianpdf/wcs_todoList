@@ -18,12 +18,8 @@
 
     {{ form_start(form) }}
     <div>
-        <div class="row">
-            {{ form_label(form.title, 'Titre', {'label_attr': {'class': 'foo'}}) }}
-        </div>
-        <div class="row">
-            {{ form_widget(form.title, {'attr': {'class': 'plop' }}) }}
-        </div>
+        {{ form_label(form.title, 'Titre', {'label_attr': {'class': 'foo'}}) }}
+        {{ form_widget(form.title, {'attr': {'class': 'plop' }}) }}
         {{ form_errors(form.title) }}
     </div>
     <div>
@@ -52,9 +48,9 @@
         {{ form_errors(form.priority) }}
     </div>
     <div>
-        {{ form_label(form.picture) }}
-        {{ form_widget(form.picture) }}
-        {{ form_errors(form.picture) }}
+        {{ form_label(form.picture.uploadedFile) }}
+        {{ form_widget(form.picture.uploadedFile) }}
+        {{ form_errors(form.picture.uploadedFile) }}
     </div>
 
         <input type="submit" value="Create" />

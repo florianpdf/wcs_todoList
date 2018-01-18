@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% for veille in veilles %}
+        <ul>
+            <li><a href="{{ veille.link }}">{{ veille.name }}</a></li>
+            <li>{{ veille.description }}</li>
+        </ul>
+        <ul>
+            <li><a href="{{ path('veille_show', {'id' : veille.id}) }}">Voir plus</a></li>
+        </ul>
+    {% endfor %}
+{% endblock %}

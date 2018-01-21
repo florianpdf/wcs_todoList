@@ -28,6 +28,7 @@ class TaskController extends Controller
 
         $tasks = $em->getRepository('AppBundle:Task')->findAll();
 
+
         return $this->render('task/index.html.twig', array(
             'tasks' => $tasks,
         ));

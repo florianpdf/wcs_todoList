@@ -12,6 +12,8 @@
                 <th>Status</th>
                 <th>Datecreate</th>
                 <th>Dateend</th>
+                <th>categ</th>
+                <th>img</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -24,6 +26,10 @@
                 <td>{% if task.status %}Yes{% else %}No{% endif %}</td>
                 <td>{% if task.dateCreate %}{{ task.dateCreate|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if task.dateEnd %}{{ task.dateEnd|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ task.category.name }}</td>
+                <td>
+                    <img width="100" src="{{ asset('uploads/' ~ task.picture.name) }}" alt="{{ task.picture.alt }}">
+                </td>
                 <td>
                     <ul>
                         <li>

@@ -46,6 +46,11 @@
             {{ form_errors(edit_form.picture.alt) }}
         </div>
 
+        <div>
+            <p>Image initial</p>
+            <img width="100" src="{{ asset('uploads/' ~ task.picture.name) }}" alt="aaa">
+        </div>
+    
         <input type="submit" value="Edit" />
     {{ form_end(edit_form) }}
 

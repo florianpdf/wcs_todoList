@@ -236,7 +236,7 @@ class Task
      *
      * @return Task
      */
-    public function setCategory(\AppBundle\Entity\Category $category)
+    public function setCategory(Category $category)
     {
         $this->category = $category;
 
@@ -260,7 +260,7 @@ class Task
      *
      * @return Task
      */
-    public function setPriority(\AppBundle\Entity\Priority $priority)
+    public function setPriority(Priority $priority)
     {
         $this->priority = $priority;
 
@@ -284,7 +284,7 @@ class Task
      *
      * @return Task
      */
-    public function setPicture(\AppBundle\Entity\Picture $picture = null)
+    public function setPicture(Picture $picture = null)
     {
         $this->picture = $picture;
 

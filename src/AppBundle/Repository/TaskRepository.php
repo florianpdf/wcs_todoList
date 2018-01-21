@@ -10,4 +10,14 @@ namespace AppBundle\Repository;
  */
 class TaskRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function myFindAll(){
+        $qb = $this->createQueryBuilder('task');
+        $qb->select('task.title', 'task.description')
+            ->join('task.category', 'category')
+            ->addSelect('category.name as categ')
+            ->join('task.picture', 'picture')
+            ->addSelect('picture.name as img');
+
+        return $qb->getQuery()->getResult();
+    }
 }

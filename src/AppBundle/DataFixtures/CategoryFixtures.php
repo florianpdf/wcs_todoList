@@ -2,7 +2,7 @@
 
 namespace AppBundle\DataFixtures;
 
-use AppBundle\Entity\Priority;
+use AppBundle\Entity\Category;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
@@ -16,9 +16,8 @@ class CategoryFixtures extends Fixture
         ];
 
         foreach ($categories as $numberPriority => $type){
-            $priority = new Priority();
-            $priority->setType($type);
-            $priority->setNumberPriority($numberPriority);
+            $priority = new Category();
+            $priority->setName($type);
             $manager->persist($priority);
 
             $this->addReference('categ_' . $numberPriority, $priority);
@@ -26,14 +25,5 @@ class CategoryFixtures extends Fixture
         }
         $manager->flush();
 
-    }
-
-    /**
-     * Get the order of this fixture
-     * @return integer
-     */
-    public function getOrder()
-    {
-        return 1;
     }
 }

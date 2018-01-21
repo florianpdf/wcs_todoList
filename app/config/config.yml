@@ -39,7 +39,7 @@ twig:
 
 #    Charger le formTheme boostrap 3, decommenter les 2 lignes ci dessous
     form_themes:
-        - 'bootstrap_3_horizontal_layout.html.twig'
+        - 'form_themes/materialize_form_theme.html.twig'
 
 # Doctrine Configuration
 doctrine:

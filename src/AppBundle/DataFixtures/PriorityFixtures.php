@@ -29,12 +29,4 @@ class PriorityFixtures extends Fixture
 
     }
 
-    /**
-     * Get the order of this fixture
-     * @return integer
-     */
-    public function getOrder()
-    {
-        return 2;
-    }
 }

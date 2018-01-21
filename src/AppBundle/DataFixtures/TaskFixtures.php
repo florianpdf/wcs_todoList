@@ -24,6 +24,7 @@ class TaskFixtures extends Fixture
         $task->setDateCreate(new \DateTime());
         $task->setDateEnd(new \DateTime("+1 day"));
 
+        $manager->persist($task);
         $manager->flush();
     }
 
@@ -33,14 +34,5 @@ class TaskFixtures extends Fixture
             CategoryFixtures::class,
             PriorityFixtures::class
         );
-    }
-
-    /**
-     * Get the order of this fixture
-     * @return integer
-     */
-    public function getOrder()
-    {
-        return 3;
     }
 }

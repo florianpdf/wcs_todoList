@@ -2,14 +2,39 @@
 
 {% block body %}
 
-    {% for veille in veilles %}
-        <ul>
-            <li><a href="{{ veille.link }}">{{ veille.name }}</a></li>
-            <li>{{ veille.description }}</li>
-        </ul>
-        <ul>
-            <li><a href="{{ path('veille_show', {'id' : veille.id}) }}">Voir plus</a></li>
-            <li><a href="{{ path('veille_edit', {'id' : veille.id}) }}">edit</a></li>
-        </ul>
-    {% endfor %}
+    <h1>Veilles list</h1>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Link</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for veille in veilles %}
+            <tr>
+                <td><a href="{{ veille.link }}">{{ veille.name }}</a></td>
+                <td>{{ veille.description }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('veille_show', {'id' : veille.id}) }}">Voir plus</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('veille_edit', {'id' : veille.id}) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('veille_new') }}">Create a new veille</a>
+        </li>
+    </ul>
 {% endblock %}

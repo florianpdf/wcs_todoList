@@ -4,6 +4,7 @@ namespace AppBundle\Form;
 
 use AppBundle\Entity\Category;
 use AppBundle\Entity\Priority;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -41,16 +42,30 @@ class TaskType extends AbstractType
                 'multiple' => false,
                 'data' => 0
             ))
+
+            // For materialize DatePicker
             ->add('dateEnd', DateTimeType::class, array(
-                'label' => 'Date de fin'
+                'label' => 'Date de fin',
+                'widget' => 'single_text',
+                'attr' => array(
+                    'class' => 'datepicker'
+                )
             ))
             ->add('category', EntityType::class, array(
                 'class' => Category::class,
+                'query_builder' => function (EntityRepository $er){
+                    $er->createQueryBuilder('c')
+                        ->orderBy('c.name', 'ASC');
+                },
                 'choice_label' => 'name',
                 'label' => 'Catégorie'
             ))
             ->add('priority', EntityType::class, array(
                 'class' => Priority::class,
+                'query_builder' => function (EntityRepository $er){
+                    return $er->createQueryBuilder('p')
+                        ->orderBy('p.numberPriority', 'DESC');
+                },
                 'choice_label' => 'type',
                 'label' => 'Priorité de la tache'
             ))

@@ -12,11 +12,9 @@ class TaskRepository extends \Doctrine\ORM\EntityRepository
 {
     public function myFindAll(){
         $qb = $this->createQueryBuilder('task');
-        $qb->select('task.title', 'task.description')
+        $qb->select('task.title', 'picture.name as img', 'category.name as categ')
             ->join('task.category', 'category')
-            ->addSelect('category.name as categ')
-            ->join('task.picture', 'picture')
-            ->addSelect('picture.name as img');
+            ->leftJoin('task.picture', 'picture');
 
         return $qb->getQuery()->getResult();
     }

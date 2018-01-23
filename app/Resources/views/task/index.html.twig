@@ -23,13 +23,13 @@
                 <td><a href="{{ path('task_show', { 'id': task.id }) }}">{{ task.id }}</a></td>
                 <td>{{ task.title }}</td>
                 <td>{{ task.description }}</td>
-                <td>{% if task.status %}Yes{% else %}No{% endif %}</td>
+                {#<td>{% if task.status %}Yes{% else %}No{% endif %}</td>#}
                 <td>{% if task.dateCreate %}{{ task.dateCreate|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if task.dateEnd %}{{ task.dateEnd|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ task.category.name }}</td>
+                <td>{{ task.category_name }}</td>
                 <td>
-                    {% if task.picture is not null %}
-                        <img width="100" src="{{ asset('uploads/' ~ task.picture.name) }}" alt="{{ task.picture.alt }}">
+                    {% if task.picture_name is not null %}
+                        <img width="100" src="{{ asset('uploads/' ~ task.picture_name) }}" alt="{{ task.picture_name }}">
                     {% else %}
                         <p>Pas d'image</p>
                     {% endif %}

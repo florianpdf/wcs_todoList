@@ -32,7 +32,11 @@
             <tr>
                 <th>Image</th>
                 <td>
-                    <img width="100" src="{{ asset('uploads/' ~ task.picture.name) }}" alt="{{ task.picture.alt }}">
+                    {% if task.picture is not null %}
+                        <img width="100" src="{{ asset('uploads/' ~ task.picture.name) }}" alt="{{ task.picture.alt }}">
+                    {% else %}
+                        <p>Pas d'image</p>
+                    {% endif %}
                 </td>
             </tr>
         </tbody>

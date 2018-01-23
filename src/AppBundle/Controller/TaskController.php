@@ -26,7 +26,7 @@ class TaskController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $tasks = $em->getRepository('AppBundle:Task')->findAll();
+        $tasks = $em->getRepository('AppBundle:Task')->myFindAll();
 
         return $this->render('task/index.html.twig', array(
             'tasks' => $tasks,
@@ -75,8 +75,13 @@ class TaskController extends Controller
      * @Route("/{id}", name="task_show")
      * @Method("GET")
      */
-    public function showAction(Task $task)
+    public function showAction($id)
     {
+        $em = $this->getDoctrine()->getManager();
+//        $task = $em->getRepository(Task::class)->myFindOneById($id);
+
+        $task = $em->getRepository(Task::class)->findOneById($id);
+
         $deleteForm = $this->createDeleteForm($task);
 
         return $this->render('task/show.html.twig', array(

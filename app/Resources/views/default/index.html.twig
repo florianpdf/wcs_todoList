@@ -2,5 +2,30 @@
 
 {% block body %}
     <h1>Welcome</h1>
-    {{ form(form) }}
+
+    <div class="row">
+        <h1>Formulaire</h1>
+        {{ form_start(form) }}
+
+        <div>
+            {{ form_label(form.search) }}
+            {{ form_widget(form.search) }}
+            <ul id="result_autocomplete"></ul>
+            {{ form_errors(form.search) }}
+        </div>
+
+        <div>
+            {{ form_widget(form.submit) }}
+        </div>
+
+        {{ form_end(form) }}
+    </div>
+
+    <div class="row">
+        <h1>Resultat</h1>
+        <div id="search_result">
+
+        </div>
+    </div>
+
 {% endblock %}

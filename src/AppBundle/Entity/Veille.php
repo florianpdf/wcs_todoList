@@ -42,6 +42,12 @@ class Veille
      */
     private $description;
 
+    /**
+     * @var
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Picture", cascade={"all"})
+     */
+    private $pictures;
 
     /**
      * Get id.
@@ -123,5 +129,48 @@ class Veille
     public function getDescription()
     {
         return $this->description;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->pictures = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add picture.
+     *
+     * @param \AppBundle\Entity\Picture $picture
+     *
+     * @return Veille
+     */
+    public function addPicture(\AppBundle\Entity\Picture $picture)
+    {
+        $this->pictures[] = $picture;
+
+        return $this;
+    }
+
+    /**
+     * Remove picture.
+     *
+     * @param \AppBundle\Entity\Picture $picture
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removePicture(\AppBundle\Entity\Picture $picture)
+    {
+        return $this->pictures->removeElement($picture);
+    }
+
+    /**
+     * Get pictures.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPictures()
+    {
+        return $this->pictures;
     }
 }

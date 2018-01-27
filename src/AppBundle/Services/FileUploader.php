@@ -3,6 +3,7 @@
 namespace AppBundle\Services;
 
 use AppBundle\Entity\Picture;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Class FileUploader
@@ -29,20 +30,45 @@ class FileUploader{
         $this->targetDir = $targetDir;
     }
 
-
     /**
-     * Upload file from Picture entity
+     * Upload action
      *
-     * @param \AppBundle\Entity\Picture $picture
+     * @param \Symfony\Component\HttpFoundation\File\UploadedFile $file
+     * @param \AppBundle\Entity\Picture                           $pictureObject
+     *
+     * @return \AppBundle\Entity\Picture
      */
-    public function upload(Picture $picture)
-    {
-        $file = $picture->getFile();
-
+    private function uploadFile(UploadedFile $file, Picture $pictureObject){
         $fileName = uniqid() . '.' . $file->guessExtension();
         $file->move($this->targetDir, $fileName);
 
-        $picture->setName($fileName);
+        $pictureObject->setName($fileName);
+        $pictureObject->setAlt($fileName);
+
+        return $pictureObject;
+    }
+
+    /**
+     * @param $object mixed
+     *
+     * Check if upload is for one or multiple file(s)
+     */
+    public function upload($object)
+    {
+        if ($object instanceof Picture){
+            $picture = $object;
+            $file = $picture->getFile();
+
+            $this->uploadFile($file, $picture);
+        } else{
+            $files = $object->getPictures()->get('file');
+            foreach ($files as $file){
+                $picture = new Picture();
+                $picture =  $this->uploadFile($file, $picture);
+                $object->addPicture($picture);
+            }
+            $object->getPictures()->remove('file');
+        }
     }
 
     /**

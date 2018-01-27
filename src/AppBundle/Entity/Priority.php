@@ -94,4 +94,3 @@ class Priority
         return $this->numberPriority;
     }
 }
-

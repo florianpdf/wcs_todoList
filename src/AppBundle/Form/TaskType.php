@@ -70,7 +70,6 @@ class TaskType extends AbstractType
                 'label' => 'Priorité de la tache'
             ))
             ->add('picture', PictureType::class)
-
         ;
     }
     

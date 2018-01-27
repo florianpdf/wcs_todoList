@@ -11,6 +11,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Task;
 use AppBundle\Entity\Veille;
 use AppBundle\Form\VeilleType;
+use AppBundle\Services\FileUploader;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -52,14 +53,16 @@ class VeilleController extends Controller
      * create new veille
      * @Route("/new", name="veille_new")
      */
-    public function newAction(Request $request){
+    public function newAction(Request $request, FileUploader $fileUploader){
         $veille = new Veille();
         $form = $this->createForm(VeilleType::class, $veille);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
-            $em = $this->getDoctrine()->getManager();
 
+            $fileUploader->upload($veille);
+
+            $em = $this->getDoctrine()->getManager();
             $em->persist($veille);
             $em->flush();
 

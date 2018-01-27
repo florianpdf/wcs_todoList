@@ -123,4 +123,3 @@ class Picture
         $this->file = $file;
     }
 }
-

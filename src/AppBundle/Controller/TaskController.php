@@ -51,7 +51,6 @@ class TaskController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
-
 //            File is not mandatory in task, so we check if user upload file
             if ($task->getPicture()->getFile() != null) {
                 $fileUploader->upload($task->getPicture());
